@@ -2,7 +2,8 @@
 
 " disable vi compatible 
 set nocompatible
-
+set ignorecase  " 検索に大文字小文字を区別しない
+set smartcase   " 大文字が含まれる場合のみ、検索に大文字小文字を区別する
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
@@ -13,12 +14,13 @@ set wildmenu
 set laststatus=2
 set statusline=%f%m%=%y[%{&fileencoding}][%{&fileformat}]
 set showtabline=2
-set hlsearch
-set incsearch
+set hlsearch    " 検索マッチテキストをハイライト
+set incsearch   " インクリメンタルサーチ
 set list
-set listchars=tab:>-,trail:-
+set listchars=tab:>>,trail:-
 set clipboard+=unnamed
 
+set showmatch   " 対応するカッコをハイライト
 
 " vundle settings
 filetype off
@@ -34,5 +36,17 @@ Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimshell'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'thinca/vim-quickrun'
+Bundle 'thinca/vim-template'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
+
+" color theme
+" syntax enable
+" if has('gui_running')
+"     set background=light
+" else
+"     set background=dark
+" endif
+" set t_Co=16
+" colorscheme solarized
