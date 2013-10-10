@@ -19,8 +19,9 @@ set incsearch   " インクリメンタルサーチ
 set list
 set listchars=tab:>>,trail:-
 set clipboard+=unnamed
-
 set showmatch   " 対応するカッコをハイライト
+
+let g:vimfiler_as_default_explorer=1
 
 " vundle settings
 filetype off
