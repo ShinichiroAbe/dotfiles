@@ -4,7 +4,7 @@
 set encoding=utf-8
 
 " automatically identify what encoging is used ,otherwise utf8 is adopted
-"set fileencodings=euc-jp,sjis,cp932,utf-8
+set fileencodings=euc-jp,sjis,cp932,utf-8
 
 " disable vi compatible 
 set nocompatible
