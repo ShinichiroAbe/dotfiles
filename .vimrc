@@ -10,9 +10,11 @@ set fileencodings=euc-jp,sjis,cp932,utf-8
 set nocompatible
 set ignorecase  " 検索に大文字小文字を区別しない
 set smartcase   " 大文字が含まれる場合のみ、検索に大文字小文字を区別する
-set tabstop=4
-set softtabstop=0
-set shiftwidth=4
+set textwidth=79    " lines longer than 79 columns will be broken
+set shiftwidth=4    " operation >> indents 4 columns; << unindents 4 columns
+set tabstop=4       " an hard TAB displays as 4 columns
+set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround      " round indent to multiple of 'shiftwidth'
 set expandtab
 set number
 set smartindent
