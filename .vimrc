@@ -31,6 +31,10 @@ set showmatch   " 対応するカッコをハイライト
 
 let g:vimfiler_as_default_explorer=1
 
+" keymappings
+" normal mode
+noremap <CR> o<ESC>
+
 " vundle settings
 filetype off
 
