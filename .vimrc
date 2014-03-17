@@ -28,6 +28,7 @@ set list
 set listchars=tab:>>,trail:-
 set clipboard+=unnamed
 set showmatch   " 対応するカッコをハイライト
+set nobackup
 
 let g:vimfiler_as_default_explorer=1
 
