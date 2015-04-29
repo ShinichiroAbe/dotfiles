@@ -4,7 +4,7 @@
 set encoding=utf-8
 
 " automatically identify what encoging is used ,otherwise utf8 is adopted
-set fileencodings=euc-jp,sjis,cp932,utf-8
+set fileencodings=utf-8,euc-jp,sjis,cp932,
 
 " disable vi compatible 
 set nocompatible
@@ -19,6 +19,7 @@ set expandtab
 set number
 set smartindent
 set wildmenu
+set wildignorecase
 set laststatus=2
 set statusline=%f%m%=%y[%{&fileencoding}][%{&fileformat}]
 set showtabline=2
@@ -28,12 +29,59 @@ set list
 set listchars=tab:>>,trail:-
 set clipboard+=unnamed
 set showmatch   " 対応するカッコをハイライト
+set nobackup
 
 let g:vimfiler_as_default_explorer=1
 
 " keymappings
 " normal mode
 noremap <CR> o<ESC>
+
+" Anywhere SID.
+function! s:SID_PREFIX()
+    return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+" Set tabline.
+function! s:my_tabline()  "{{{
+    let s = ''
+    for i in range(1, tabpagenr('$'))
+        let bufnrs = tabpagebuflist(i)
+        let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+        let no = i  " display 0-origin tabpagenr.
+        let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+        let title = fnamemodify(bufname(bufnr), ':t')
+        let title = '[' . title . ']'
+        let s .= '%'.i.'T'
+        let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+        let s .= no . ':' . title
+        let s .= mod
+        let s .= '%#TabLineFill# '
+    endfor
+    let s .= '%#TabLineFill#%T%=%#TabLine#'
+    return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2
+" 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+    execute 'nnoremap <silent> [Tag]'.n ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1で1番左のタブ、t2で1番左から2番目のタブにジャンプ
+
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
 
 " vundle settings
 filetype off
@@ -47,10 +95,14 @@ Bundle 'Shougo/vimfiler.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimshell'
+Bundle 'Shougo/unite-outline'
+Bundle 'Shougo/neomru.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-template'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/CCTree'
+Bundle 'vim-scripts/a.vim'
 
 filetype plugin indent on
 
@@ -63,3 +115,8 @@ filetype plugin indent on
 " endif
 " set t_Co=16
 " colorscheme solarized
+
+" Unite
+let g:unite_source_file_mru_limit = 100
+nnoremap <silent> ,uu :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,uo :<C-u>Unite outline<CR>
