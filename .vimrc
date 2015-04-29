@@ -19,7 +19,7 @@ set expandtab
 set number
 set smartindent
 set wildmenu
-set wildignorecase
+" set wildignorecase
 set laststatus=2
 set statusline=%f%m%=%y[%{&fileencoding}][%{&fileformat}]
 set showtabline=2
@@ -103,6 +103,7 @@ Bundle 'thinca/vim-template'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/CCTree'
 Bundle 'vim-scripts/a.vim'
+Bundle 'davidhalter/jedi-vim'
 
 filetype plugin indent on
 
