@@ -10,7 +10,6 @@ set fileencodings=utf-8,euc-jp,sjis,cp932,
 set nocompatible
 set ignorecase  " 検索に大文字小文字を区別しない
 set smartcase   " 大文字が含まれる場合のみ、検索に大文字小文字を区別する
-set textwidth=79    " lines longer than 79 columns will be broken
 set shiftwidth=4    " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4       " an hard TAB displays as 4 columns
 set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
